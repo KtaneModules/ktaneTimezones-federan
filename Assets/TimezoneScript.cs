@@ -200,7 +200,10 @@ public class TimezoneScript : MonoBehaviour {
 
         if (is12)
         {
-            correctTime = FormatTwoDigits(Format12h(this.toHour)) + FormatTwoDigits(this.toMinutes);
+            string correctHour;
+            if (this.toHour == 0) correctHour = "12";
+            else correctHour = FormatTwoDigits(Format12h(this.toHour));
+            correctTime = correctHour + FormatTwoDigits(this.toMinutes);
         }
         else
         {
