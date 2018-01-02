@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
+
 
 public class TimezoneScript : MonoBehaviour {
     public KMBombInfo BombInfo;
@@ -32,6 +34,9 @@ public class TimezoneScript : MonoBehaviour {
     int correctIndex;
     bool isActivated = false;
 
+    private static int cModuleID = 1;
+    private int moduleID;
+
     // Use this for initialization
     void Start() {
         this.cities.Add("Alofi", -11);
@@ -61,6 +66,8 @@ public class TimezoneScript : MonoBehaviour {
 
         this.is12 = (Random.value > 0.5f);
 
+        this.moduleID = cModuleID++;
+
         Init();
 
         GetComponent<KMBombModule>().OnActivate += ActivateModule;
@@ -81,9 +88,10 @@ public class TimezoneScript : MonoBehaviour {
         this.fromHour = Random.Range(0, 23);
         this.fromMinutes = Random.Range(0, 12) * 5;
 
+        
+
         if (this.fromHour < 12)
         {
-            Debug.Log("ES AM");
             this.isam = true;
         }
 
@@ -96,7 +104,7 @@ public class TimezoneScript : MonoBehaviour {
             PM.material.color = Color.green;
         }
 
-        this.HoursIndicator.transform.Rotate(new Vector3(0,30 * Format12h(this.fromHour), 0));
+        this.HoursIndicator.transform.Rotate(new Vector3(0,30 * Format12h(this.fromHour) + this.fromMinutes/2, 0));
         this.MinutesIndicator.transform.Rotate(new Vector3(0, 6 * this.fromMinutes, 0));
 
         this.from = keys[Random.Range(0, keys.Count)];
@@ -110,8 +118,17 @@ public class TimezoneScript : MonoBehaviour {
         this.toHour = ConvertHour(this.fromHour, this.cities[from], this.cities[to]);
         this.toMinutes = this.fromMinutes;
 
-        Debug.Log("Hora inicial: " + FormatTwoDigits(this.fromHour) + ":" + FormatTwoDigits(this.fromMinutes));
-        Debug.Log("Hora convertida: " + FormatTwoDigits(this.toHour) + ":" + FormatTwoDigits(this.toMinutes));
+        Debug.Log("[Timezones #" + this.moduleID + "] From: " + this.from + " (UTC " + this.cities[from] + ") - To: " + this.to + " (UTC " + this.cities[to] + ")");
+        Debug.Log("[Timezones #" + this.moduleID + "] Initial time: " + FormatTwoDigits(this.fromHour) + ":" + FormatTwoDigits(this.fromMinutes));
+        Debug.Log("[Timezones #" + this.moduleID + "] Converted time: " + FormatTwoDigits(this.toHour) + ":" + FormatTwoDigits(this.toMinutes));
+        
+        if (this.is12)
+        {
+            Debug.Log("[Timezones #" + this.moduleID + "] Answer requested in 12h format.");
+        } else
+        {
+            Debug.Log("[Timezones #" + this.moduleID + "] Answer requested in 24h format.");
+        }
 
         // Change cities display text
         this.TextToCity.text = this.to;
@@ -144,7 +161,6 @@ public class TimezoneScript : MonoBehaviour {
     int ConvertHour(int hour, int UTC1, int UTC2)
     {
         hour = hour - UTC1 + UTC2;
-        Debug.Log("DE: " + UTC1 + " - A: " + UTC2 + " - DA: " + hour);
         hour = (hour + 24) % 24;
 
         return hour;
@@ -168,12 +184,10 @@ public class TimezoneScript : MonoBehaviour {
         GetComponent<KMSelectable>().AddInteractionPunch();
         if (!isActivated)
         {
-            Debug.Log("Pressed button before module has been activated!");
             GetComponent<KMBombModule>().HandleStrike();
         }
         else
         {
-            Debug.Log("Pressed " + buttonNumber + " button");
             pushNumberToDisplay(buttonNumber);
         }
     }
@@ -192,14 +206,17 @@ public class TimezoneScript : MonoBehaviour {
         {
             correctTime = FormatTwoDigits(this.toHour) + FormatTwoDigits(this.toMinutes);
         }
+
         
 
         if (correctTime.Equals(this.TextDisplay.text))
         {
+            Debug.Log("[Timezones #" + this.moduleID + "] Module passed. Answer: " + correctTime + ".");
             BombModule.HandlePass();
         }
         else
         {
+            Debug.Log("[Timezones #" + this.moduleID + "] Submitted answer: " + this.TextDisplay.text + ". Correct answer: " + correctTime + ". Issued strike.");
             BombModule.HandleStrike();
         }
     }
@@ -220,5 +237,20 @@ public class TimezoneScript : MonoBehaviour {
     {
         return num % 12;
     }
+
+    KMSelectable[] ProcessTwitchCommand(string command)
+    {
+        command = command.ToLowerInvariant().Trim();
+
+        if (Regex.IsMatch(command, @"^submit \d\d\d\d$"))
+        {
+            command = command.Substring(7).Trim();
+
+            return new KMSelectable[] { this.buttons[(int)System.Char.GetNumericValue(command[0])], this.buttons[(int)System.Char.GetNumericValue(command[1])], this.buttons[(int)System.Char.GetNumericValue(command[2])], this.buttons[(int)System.Char.GetNumericValue(command[3])], InputButton };
+        }
+
+        return null;
+    }
+
 }
 
