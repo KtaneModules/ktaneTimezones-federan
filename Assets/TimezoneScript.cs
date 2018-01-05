@@ -76,14 +76,6 @@ public class TimezoneScript : MonoBehaviour {
     void Init()
     {
 
-        if (is12)
-        {
-            h12.material.color = Color.green;
-        } else
-        {
-            h24.material.color = Color.green;
-        }
-
         List<string> keys = new List<string>(this.cities.Keys);
         this.fromHour = Random.Range(0, 23);
         this.fromMinutes = Random.Range(0, 12) * 5;
@@ -95,7 +87,7 @@ public class TimezoneScript : MonoBehaviour {
             this.isam = true;
         }
 
-        if (isam)
+        if (this.isam)
         {
             AM.material.color = Color.green;
         }
@@ -113,10 +105,19 @@ public class TimezoneScript : MonoBehaviour {
         {
             to = keys[Random.Range(0, keys.Count)];
         }
-        
+
+        /* TEST
+        this.fromHour = 2;
+        this.fromMinutes = 25;
+        this.from = "Denver";
+        this.to = "Unalaska";
+        this.is12 = true;*/
+
         // Get correct answer
         this.toHour = ConvertHour(this.fromHour, this.cities[from], this.cities[to]);
         this.toMinutes = this.fromMinutes;
+
+        
 
         Debug.Log("[Timezones #" + this.moduleID + "] From: " + this.from + " (UTC " + this.cities[from] + ") - To: " + this.to + " (UTC " + this.cities[to] + ")");
         Debug.Log("[Timezones #" + this.moduleID + "] Initial time: " + FormatTwoDigits(this.fromHour) + ":" + FormatTwoDigits(this.fromMinutes));
@@ -124,9 +125,12 @@ public class TimezoneScript : MonoBehaviour {
         
         if (this.is12)
         {
+            h12.material.color = Color.green;
             Debug.Log("[Timezones #" + this.moduleID + "] Answer requested in 12h format.");
-        } else
+        }
+        else
         {
+            h24.material.color = Color.green;
             Debug.Log("[Timezones #" + this.moduleID + "] Answer requested in 24h format.");
         }
 
@@ -200,10 +204,7 @@ public class TimezoneScript : MonoBehaviour {
 
         if (is12)
         {
-            string correctHour;
-            if (this.toHour == 0) correctHour = "12";
-            else correctHour = FormatTwoDigits(Format12h(this.toHour));
-            correctTime = correctHour + FormatTwoDigits(this.toMinutes);
+            correctTime = FormatTwoDigits(Format12h(this.toHour)) + FormatTwoDigits(this.toMinutes);
         }
         else
         {
@@ -238,7 +239,16 @@ public class TimezoneScript : MonoBehaviour {
 
     int Format12h(int num)
     {
-        return num % 12;
+        num = num % 12;
+        if (num == 0)
+        {
+            return 12;
+        }
+        else
+        {
+            return num;
+        }
+        
     }
 
     KMSelectable[] ProcessTwitchCommand(string command)
