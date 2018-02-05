@@ -37,6 +37,9 @@ public class TimezoneScript : MonoBehaviour {
     private static int cModuleID = 1;
     private int moduleID;
 
+    public string TwitchManualCode;
+    public string TwitchHelpMessage;
+
     // Use this for initialization
     void Start() {
         this.cities.Add("Alofi", -11);
@@ -68,9 +71,12 @@ public class TimezoneScript : MonoBehaviour {
 
         this.moduleID = cModuleID++;
 
+
         Init();
 
         GetComponent<KMBombModule>().OnActivate += ActivateModule;
+
+        
     }
 
     void Init()

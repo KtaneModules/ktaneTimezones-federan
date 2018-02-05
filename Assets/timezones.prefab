@@ -4123,7 +4123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - Glow
 --- !u!114 &114080189875139446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4149,7 +4149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114090141313237014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4162,7 +4162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114113775161811138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4262,7 +4262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114165908698329478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4498,7 +4498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - Glow
 --- !u!114 &114377706771951074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4580,7 +4580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114421236072121010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4628,7 +4628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114486495493839984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4676,7 +4676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114607670591105916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4711,7 +4711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114632258218601774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4749,6 +4749,9 @@ MonoBehaviour:
   HoursIndicator: {fileID: 1973158741176890}
   isam: 0
   is12: 0
+  TwitchManualCode: Timezones
+  TwitchHelpMessage: Use !{0} submit HHMM (HH = hours and MM = minutes) to submit
+    your conversion result.
 --- !u!114 &114637759111725240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4822,7 +4825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114790188958816140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4924,7 +4927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114868184475016380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4959,7 +4962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - Glow
 --- !u!114 &114882028907255812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5011,7 +5014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!114 &114912369829111998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5133,7 +5136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - Glow
 --- !u!114 &114992035501468768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5146,7 +5149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - KT/Mobile/DiffuseTint
+  - KT/Mobile/Diffuse
 --- !u!135 &135334292902883300
 SphereCollider:
   m_ObjectHideFlags: 1
