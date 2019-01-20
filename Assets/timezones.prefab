@@ -4749,7 +4749,7 @@ MonoBehaviour:
   HoursIndicator: {fileID: 1973158741176890}
   isam: 0
   is12: 0
-  TwitchManualCode: Timezones
+  TwitchManualCode: Timezone
   TwitchHelpMessage: Use !{0} submit HHMM (HH = hours and MM = minutes) to submit
     your conversion result.
 --- !u!114 &114637759111725240
